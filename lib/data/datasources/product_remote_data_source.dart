@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:haupcar/data/services/network_service.dart';
 
 import '../models/product_model.dart';
@@ -15,11 +13,11 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<List<ProductModel>> getProductsByCategory(String category) async {
-    final response = await networkService.get(
-        'https://dummyjson.com/products/category/$category', null);
+    final response =
+        await networkService.get('products/category/$category', null);
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> productJson = json.decode(response.body);
+    if (response != null) {
+      final Map<String, dynamic> productJson = response;
       final List<dynamic> products = productJson['products'];
       return products.map((json) => ProductModel.fromJson(json)).toList();
     } else {

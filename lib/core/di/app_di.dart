@@ -4,6 +4,8 @@ import 'package:haupcar/data/datasources/product_remote_data_source.dart';
 import 'package:haupcar/data/repositories/goods_repository_impl.dart';
 import 'package:haupcar/data/services/network_service.dart';
 import 'package:haupcar/domain/repositories/goods_repository.dart';
+import 'package:haupcar/domain/usecases/get_categories.dart';
+import 'package:haupcar/domain/usecases/get_products_by_category.dart';
 import 'package:haupcar/presentation/bloc/category/category_bloc.dart';
 import 'package:haupcar/presentation/bloc/products/products_bloc.dart';
 
@@ -14,6 +16,7 @@ Future configureDependencies() async {
 
   // await Hive.openBox(RECIPE_CACHE_BOX_NAME);
 
+  ///`Datasources`
   getIt.registerLazySingleton<CategoryRemoteDataSource>(
     () => CategoryRemoteDataSourceImpl(networkService: getIt()),
   );
@@ -27,6 +30,14 @@ Future configureDependencies() async {
   getIt.registerLazySingleton<GoodsRepository>(
     () => GoodsRepositoryImpl(
         categoryRemoteDataSource: getIt(), productRemoteDataSource: getIt()),
+  );
+
+  ///`Usecases`
+  getIt.registerLazySingleton<GetCategories>(
+    () => GetCategories(getIt()),
+  );
+  getIt.registerLazySingleton<GetProductsByCategory>(
+    () => GetProductsByCategory(getIt()),
   );
 
   ///`Bloc`

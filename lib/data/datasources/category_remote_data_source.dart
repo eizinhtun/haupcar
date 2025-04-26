@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:haupcar/data/services/network_service.dart';
 
 import '../models/category_model.dart';
@@ -15,11 +13,10 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
 
   @override
   Future<List<CategoryModel>> getCategories() async {
-    final response = await networkService.get(
-        'https://dummyjson.com/products/categories', null);
+    final response = await networkService.get('products/categories', null);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> categoryJson = json.decode(response.body);
+    if (response != null) {
+      final List<dynamic> categoryJson = response;
       return categoryJson.map((json) => CategoryModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load categories');

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:haupcar/core/di/app_di.dart';
 import 'package:haupcar/presentation/pages/app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  await configureDependencies();
   runApp(const MyApp());
 }
 

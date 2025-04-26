@@ -27,7 +27,7 @@ class App extends StatelessWidget {
             child: child!,
           );
         },
-        home: CategoriesPage(),
+        home: CategoryPage(),
       ),
     );
   }
