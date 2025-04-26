@@ -1,7 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:haupcar/domain/repositories/goods_repository.dart';
-import 'package:haupcar/domain/usecases/get_categories.dart';
-
+import 'package:haupcar/domain/domain.dart';
 import 'category_event.dart';
 import 'category_state.dart';
 

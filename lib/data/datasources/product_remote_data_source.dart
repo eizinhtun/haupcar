@@ -1,6 +1,5 @@
+import 'package:haupcar/data/models/models.dart';
 import 'package:haupcar/data/services/network_service.dart';
-
-import '../models/product_model.dart';
 
 abstract class ProductRemoteDataSource {
   Future<List<ProductModel>> getProductsByCategory(String category);

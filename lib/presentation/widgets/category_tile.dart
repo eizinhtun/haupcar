@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/category.dart';
-import '../pages/products_page.dart';
+import 'package:haupcar/domain/entities/entities.dart';
+import 'package:haupcar/presentation/pages/pages.dart';
 
 class CategoryTile extends StatelessWidget {
   final Category category;
 
-  CategoryTile({required this.category});
+  const CategoryTile({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(category.name),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductsPage(category: category.name),
-          ),
-        );
-      },
+    return Container(
+      margin: EdgeInsets.only(
+        top: 8,
+        bottom: 8,
+      ),
+      color: Colors.white,
+      child: ListTile(
+        title: Text(category.name),
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductsPage(category: category.name),
+            ),
+          );
+        },
+      ),
     );
   }
 }

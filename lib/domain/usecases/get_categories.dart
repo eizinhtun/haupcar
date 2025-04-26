@@ -1,5 +1,5 @@
-import '../entities/category.dart';
-import '../repositories/goods_repository.dart';
+import 'package:haupcar/domain/entities/entities.dart';
+import 'package:haupcar/domain/repositories/repositories.dart';
 
 class GetCategories {
   final GoodsRepository repository;

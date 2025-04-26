@@ -1,17 +1,14 @@
 import 'package:get_it/get_it.dart';
-import 'package:haupcar/data/datasources/category_remote_data_source.dart';
-import 'package:haupcar/data/datasources/product_remote_data_source.dart';
-import 'package:haupcar/data/repositories/goods_repository_impl.dart';
-import 'package:haupcar/data/services/network_service.dart';
-import 'package:haupcar/domain/repositories/goods_repository.dart';
-import 'package:haupcar/domain/usecases/get_categories.dart';
-import 'package:haupcar/domain/usecases/get_products_by_category.dart';
-import 'package:haupcar/presentation/bloc/category/category_bloc.dart';
-import 'package:haupcar/presentation/bloc/products/products_bloc.dart';
+import 'package:haupcar/data/data.dart';
+import 'package:haupcar/domain/domain.dart';
+import 'package:haupcar/presentation/presentation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt getIt = GetIt.instance;
 
 Future configureDependencies() async {
+  getIt.registerSingleton<SharedPrefs>(
+      SharedPrefs(await SharedPreferences.getInstance()));
   getIt.registerLazySingleton<NetworkService>(() => NetworkService.instance());
 
   // await Hive.openBox(RECIPE_CACHE_BOX_NAME);
@@ -46,4 +43,5 @@ Future configureDependencies() async {
   getIt.registerFactory<ProductsBloc>(
     () => ProductsBloc(getProductsByCategory: getIt()),
   );
+  getIt.registerFactory<LanguageCubit>(() => LanguageCubit());
 }

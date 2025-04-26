@@ -1,9 +1,5 @@
-import '../../domain/entities/category.dart';
-import '../../domain/entities/product.dart';
-import '../../domain/repositories/goods_repository.dart';
-import '../datasources/category_remote_data_source.dart';
-import '../datasources/product_remote_data_source.dart';
-
+import 'package:haupcar/data/data.dart';
+import 'package:haupcar/domain/domain.dart';
 
 class GoodsRepositoryImpl implements GoodsRepository {
   final CategoryRemoteDataSource categoryRemoteDataSource;
@@ -11,7 +7,7 @@ class GoodsRepositoryImpl implements GoodsRepository {
 
   GoodsRepositoryImpl({
     required this.categoryRemoteDataSource,
-    required this.productRemoteDataSource, 
+    required this.productRemoteDataSource,
   });
 
   @override
@@ -22,13 +18,16 @@ class GoodsRepositoryImpl implements GoodsRepository {
 
   @override
   Future<List<Product>> getProductsByCategory(String category) async {
-    final productModels = await productRemoteDataSource.getProductsByCategory(category);
-    return productModels.map((model) => Product(
-      id: model.id,
-      title: model.title,
-      description: model.description,
-      price: model.price,
-      thumbnail: model.thumbnail,
-    )).toList();
+    final productModels =
+        await productRemoteDataSource.getProductsByCategory(category);
+    return productModels
+        .map((model) => Product(
+              id: model.id,
+              title: model.title,
+              description: model.description,
+              price: model.price,
+              thumbnail: model.thumbnail,
+            ))
+        .toList();
   }
 }

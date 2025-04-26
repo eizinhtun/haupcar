@@ -1,14 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/product.dart';
-import '../../../domain/usecases/get_products_by_category.dart';
-
+import 'package:haupcar/domain/domain.dart';
 part 'products_event.dart';
 part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final GetProductsByCategory getProductsByCategory;
 
-  ProductsBloc({required this.getProductsByCategory}) : super(ProductsInitial()) {
+  ProductsBloc({required this.getProductsByCategory})
+      : super(ProductsInitial()) {
     on<FetchProducts>(_onFetchProducts);
   }
 

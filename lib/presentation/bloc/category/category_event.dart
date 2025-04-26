@@ -1,4 +1,4 @@
-import 'package:haupcar/domain/entities/category.dart';
+import 'package:haupcar/domain/domain.dart';
 
 sealed class CategoryEvent {}
 

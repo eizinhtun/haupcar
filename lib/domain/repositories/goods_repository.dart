@@ -1,5 +1,4 @@
-import '../entities/category.dart';
-import '../entities/product.dart';
+import 'package:haupcar/domain/entities/entities.dart';
 
 abstract class GoodsRepository {
   Future<List<Category>> getCategories();
