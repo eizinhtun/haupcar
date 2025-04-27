@@ -11,18 +11,21 @@ class CommonDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
+      child: Column(
+        children: [
           DrawerHeader(
             decoration: BoxDecoration(
-                // color: Colors.blue,
+              color: Colors.teal,
+            ),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                AppLocalizations.of(context).language,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-            child: Text(
-              AppLocalizations.of(context).language,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 24,
               ),
             ),
           ),
@@ -30,25 +33,20 @@ class CommonDrawer extends StatelessWidget {
             leading: Image.asset(
               "assets/flags/thai.png",
               width: 32,
-              height: 32,
             ),
             title: Text(AppLocalizations.of(context).thai),
-            onTap: () {
-              // Handle the tap
-              context.read<LanguageCubit>().switchToThai();
-            },
+            onTap: () => context.read<LanguageCubit>().switchToThai(),
+          ),
+          SizedBox(
+            height: 8,
           ),
           ListTile(
             leading: Image.asset(
               "assets/flags/us.png",
               width: 32,
-              height: 32,
             ),
             title: Text(AppLocalizations.of(context).english),
-            onTap: () {
-              // Handle the tap
-              context.read<LanguageCubit>().switchToEnglish();
-            },
+            onTap: () => context.read<LanguageCubit>().switchToEnglish(),
           ),
         ],
       ),

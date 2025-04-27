@@ -18,10 +18,11 @@ class CategoryTile extends StatelessWidget {
       child: ListTile(
         title: Text(category.name),
         onTap: () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductsPage(category: category.name),
+              builder: (context) =>
+                  ProductsPage(name: category.name, category: category.slug),
             ),
           );
         },

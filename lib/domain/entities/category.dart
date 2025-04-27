@@ -1,5 +1,5 @@
 class Category {
   final String name;
-
-  Category({required this.name});
+  final String slug;
+  Category({required this.slug, required this.name});
 }

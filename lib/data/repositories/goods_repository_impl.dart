@@ -13,7 +13,9 @@ class GoodsRepositoryImpl implements GoodsRepository {
   @override
   Future<List<Category>> getCategories() async {
     final categoryModels = await categoryRemoteDataSource.getCategories();
-    return categoryModels.map((model) => Category(name: model.name)).toList();
+    return categoryModels
+        .map((model) => Category(name: model.name, slug: model.slug))
+        .toList();
   }
 
   @override

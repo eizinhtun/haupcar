@@ -44,6 +44,10 @@ dependencies:
   http_interceptor: ^2.0.0
   shared_preferences: ^2.5.3
   shared_preferences_foundation: ^2.5.3
+  lottie: ^2.7.0
+  cached_network_image: ^3.3.0
+  shimmer: ^3.0.0
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +73,7 @@ flutter:
   assets:
     - lib/l10n/
     - assets/flags/
+    - assets/lottie/empty_box.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

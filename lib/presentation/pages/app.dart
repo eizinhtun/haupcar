@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:haupcar/core/core.dart';
 import 'package:haupcar/presentation/bloc/blocs.dart';
+import 'package:haupcar/presentation/bloc/connectivity/connectivity_cubit.dart';
 import 'package:haupcar/presentation/pages/pages.dart';
 import 'package:haupcar/presentation/widgets/widgets.dart';
 
@@ -16,13 +17,52 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => getIt<CategoryBloc>()),
         BlocProvider(create: (context) => getIt<ProductsBloc>()),
         BlocProvider(create: (context) => getIt<LanguageCubit>()),
+        BlocProvider(
+          create: (context) => getIt<ConnectivityCubit>(),
+        ),
       ],
       child: BlocBuilder<LanguageCubit, Locale>(
         builder: (context, locale) {
           return MaterialApp(
-            title: 'Recipe Finder',
+            title: 'Haupcar',
             debugShowCheckedModeBanner: false,
-            themeMode: ThemeMode.light,
+            themeMode: ThemeMode.system,
+            theme: ThemeData(
+              primarySwatch: Colors.teal,
+              scaffoldBackgroundColor: Colors.grey.shade100,
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.teal,
+                foregroundColor: Colors.white,
+                elevation: 0,
+              ),
+              listTileTheme: ListTileThemeData(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              textTheme: TextTheme(
+                bodyLarge: TextStyle(fontSize: 16),
+                bodyMedium: TextStyle(fontSize: 14),
+              ),
+            ),
+            darkTheme: ThemeData(
+              primarySwatch: Colors.deepOrange,
+              brightness: Brightness.dark,
+              scaffoldBackgroundColor: Colors.grey.shade900,
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.deepOrange.shade700,
+                foregroundColor: Colors.white,
+              ),
+              listTileTheme: ListTileThemeData(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              textTheme: TextTheme(
+                bodyLarge: TextStyle(fontSize: 16),
+                bodyMedium: TextStyle(fontSize: 14),
+              ),
+            ),
             builder: (context, child) {
               MediaQueryData data = MediaQuery.of(context);
               return MediaQuery(
@@ -40,7 +80,6 @@ class App extends StatelessWidget {
             supportedLocales: [
               Locale('en', 'US'), // English
               Locale('th', 'TH'), // Thailand
-              // Add other supported locales here
             ],
             home: HomePage(),
           );
