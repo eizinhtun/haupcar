@@ -18,6 +18,6 @@ class LanguageCubit extends Cubit<Locale> {
 
   Future<void> _loadSavedLocale() async {
     final locale = getIt.get<SharedPrefs>().getLocale();
-    emit(locale!);
+    emit(locale ?? Locale('en', "US"));
   }
 }

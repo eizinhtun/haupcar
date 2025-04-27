@@ -2,7 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:haupcar/data/data.dart';
 import 'package:haupcar/domain/domain.dart';
-import 'package:haupcar/presentation/bloc/connectivity/connectivity_cubit.dart';
 import 'package:haupcar/presentation/presentation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences/util/legacy_to_async_migration_util.dart';
@@ -31,11 +30,22 @@ Future configureDependencies() async {
     () => ProductRemoteDataSourceImpl(networkService: getIt()),
   );
 
+  getIt.registerLazySingleton<CategoryLocalDataSource>(
+    () => CategoryLocalDataSourceImpl(),
+  );
+
+  getIt.registerLazySingleton<ProductLocalDataSource>(
+    () => ProductLocalDataSourceImpl(),
+  );
+
   ///`Repository`
 
   getIt.registerLazySingleton<GoodsRepository>(
     () => GoodsRepositoryImpl(
-        categoryRemoteDataSource: getIt(), productRemoteDataSource: getIt()),
+        categoryRemoteDataSource: getIt(),
+        productRemoteDataSource: getIt(),
+        categoryLocalDataSource: getIt(),
+        productLocalDataSource: getIt()),
   );
 
   ///`Usecases`

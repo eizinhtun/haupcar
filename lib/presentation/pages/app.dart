@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:haupcar/core/core.dart';
 import 'package:haupcar/presentation/bloc/blocs.dart';
-import 'package:haupcar/presentation/bloc/connectivity/connectivity_cubit.dart';
 import 'package:haupcar/presentation/pages/pages.dart';
 import 'package:haupcar/presentation/widgets/widgets.dart';
 
@@ -26,7 +25,7 @@ class App extends StatelessWidget {
           return MaterialApp(
             title: 'Haupcar',
             debugShowCheckedModeBanner: false,
-            themeMode: ThemeMode.system,
+            themeMode: ThemeMode.light,
             theme: ThemeData(
               primarySwatch: Colors.teal,
               scaffoldBackgroundColor: Colors.grey.shade100,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:haupcar/core/core.dart';
 import 'package:haupcar/presentation/bloc/blocs.dart';
 import 'package:haupcar/presentation/widgets/widgets.dart';
@@ -8,6 +9,7 @@ class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CategoryPageState createState() => _CategoryPageState();
 }
 
@@ -20,16 +22,22 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ConnectivityCubit, ConnectivityStatus>(
-      builder: (context, status) {
-        if (status == ConnectivityStatus.disconnected) {
-          return NoInternetWidget(
-            onRetry: () {
-              context.read<CategoryBloc>().add(LoadCategories());
-            },
-          );
-        }
-        return Scaffold(
+    return BlocListener<ConnectivityCubit, ConnectivityStatus>(
+        listener: (context, status) {
+          if (status == ConnectivityStatus.disconnected) {
+            Fluttertoast.showToast(
+              msg:
+                  "${AppLocalizations.of(context).noInternet}, ${AppLocalizations.of(context).checkConnection}",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          }
+        },
+        child: Scaffold(
           backgroundColor: Colors.grey.shade100,
           body: SingleChildScrollView(
             padding: EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
@@ -98,8 +106,6 @@ class _CategoryPageState extends State<CategoryPage> {
               ],
             ),
           ),
-        );
-      },
-    );
+        ));
   }
 }

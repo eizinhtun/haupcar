@@ -13,10 +13,11 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
   @override
   Future<List<CategoryModel>> getCategories() async {
     final response = await networkService.get('products/categories', null);
-
     if (response != null) {
       final List<dynamic> categoryJson = response;
-      return categoryJson.map((json) => CategoryModel.fromJson(json)).toList();
+      final categories =
+          categoryJson.map((json) => CategoryModel.fromJson(json)).toList();
+      return categories;
     } else {
       throw Exception('Failed to load categories');
     }

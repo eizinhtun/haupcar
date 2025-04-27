@@ -14,11 +14,12 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   Future<List<ProductModel>> getProductsByCategory(String category) async {
     final response =
         await networkService.get('products/category/$category', null);
-
     if (response != null) {
       final Map<String, dynamic> productJson = response;
       final List<dynamic> products = productJson['products'];
-      return products.map((json) => ProductModel.fromJson(json)).toList();
+      final productList =
+          products.map((json) => ProductModel.fromJson(json)).toList();
+      return productList;
     } else {
       throw Exception('Failed to load products');
     }
